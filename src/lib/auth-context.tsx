@@ -10,7 +10,11 @@ type AuthContextType = {
   signUp: (email: string, password: string, metadata?: { 
     name: string
     studentId: string
-    phoneNumber: string 
+    phoneNumber: string
+    emergencyContact?: string
+    medicalConditions?: string
+    allergies?: string
+    bloodType?: string
   }) => Promise<void>
   signOut: () => Promise<void>
 }
@@ -61,7 +65,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     metadata?: { 
       name: string
       studentId: string
-      phoneNumber: string 
+      phoneNumber: string
+      emergencyContact?: string
+      medicalConditions?: string
+      allergies?: string
+      bloodType?: string
     }
   ) => {
     if (email.toLowerCase() === 'admin' || email === 'admin@admin.com') {

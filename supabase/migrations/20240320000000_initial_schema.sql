@@ -81,8 +81,26 @@ create policy "Users can update their own responses"
 create or replace function public.handle_new_user()
 returns trigger as $$
 begin
-  insert into public.profiles (id, full_name)
-  values (new.id, new.raw_user_meta_data->>'full_name');
+  insert into public.profiles (
+    id,
+    full_name,
+    student_id,
+    phone_number,
+    emergency_contact,
+    medical_conditions,
+    allergies,
+    blood_type
+  )
+  values (
+    new.id,
+    new.raw_user_meta_data->>'name',
+    new.raw_user_meta_data->>'studentId',
+    new.raw_user_meta_data->>'phoneNumber',
+    new.raw_user_meta_data->>'emergencyContact',
+    new.raw_user_meta_data->>'medicalConditions',
+    new.raw_user_meta_data->>'allergies',
+    new.raw_user_meta_data->>'bloodType'
+  );
   return new;
 end;
 $$ language plpgsql security definer;
