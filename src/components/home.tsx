@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { Wifi, WifiOff } from "lucide-react";
+import React, { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import EmergencyCategoryGrid from "./EmergencyCategoryGrid";
 import { default as EmergencyProcedure } from "./EmergencyProcedure";
 import EmergencyContacts from "./EmergencyContacts";
-
 import { EmergencyCategory } from "./EmergencyCategoryGrid";
 
 interface EmergencyStep {
@@ -17,7 +15,6 @@ interface EmergencyStep {
 }
 
 const Home = () => {
-  const [isOnline, setIsOnline] = useState<boolean>(navigator.onLine);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [showContacts, setShowContacts] = useState<boolean>(false);
 
@@ -186,20 +183,6 @@ const Home = () => {
 
   // Using default contacts from EmergencyContacts component
 
-  useEffect(() => {
-    const handleOnlineStatusChange = () => {
-      setIsOnline(navigator.onLine);
-    };
-
-    window.addEventListener("online", handleOnlineStatusChange);
-    window.addEventListener("offline", handleOnlineStatusChange);
-
-    return () => {
-      window.removeEventListener("online", handleOnlineStatusChange);
-      window.removeEventListener("offline", handleOnlineStatusChange);
-    };
-  }, []);
-
   const handleCategorySelect = (category: EmergencyCategory) => {
     setSelectedCategory(category.id);
     setShowContacts(false);
@@ -216,39 +199,7 @@ const Home = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-red-600 text-white p-4 shadow-md">
-        <div className="container mx-auto flex justify-between items-center">
-          <h1 className="text-2xl md:text-3xl font-bold">
-            Emergency Health Assistant
-          </h1>
-          <div className="flex items-center">
-            {isOnline ? (
-              <div className="flex items-center text-green-300">
-                <Wifi className="h-5 w-5 mr-1" />
-                <span className="text-sm">Online</span>
-              </div>
-            ) : (
-              <div className="flex items-center text-yellow-300">
-                <WifiOff className="h-5 w-5 mr-1" />
-                <span className="text-sm">Offline</span>
-              </div>
-            )}
-          </div>
-        </div>
-      </header>
-
-      <main className="container mx-auto p-4">
-        {!isOnline && (
-          <Alert className="mb-4 bg-yellow-50 border-yellow-200">
-            <AlertDescription>
-              You are currently offline. Emergency procedures are still
-              available, but location sharing and calling features may be
-              limited.
-            </AlertDescription>
-          </Alert>
-        )}
-
+      <main className="container mx-auto py-6 px-4">
         <Card className="bg-white shadow-lg border-0">
           <CardContent className="p-6">
             {!selectedCategory && !showContacts && (
@@ -288,9 +239,9 @@ const Home = () => {
         </Card>
       </main>
 
-      <footer className="bg-gray-100 p-4 mt-8">
+      <footer className="py-4 mt-8 border-t">
         <div className="container mx-auto text-center text-gray-600 text-sm">
-          <p>Emergency Health Assistant for Campus Use</p>
+          <p>Emergency Health Assistant for Bohol Island State University - Bilar Campus</p>
           <p className="mt-1">
             Always call professional emergency services for serious medical
             situations
