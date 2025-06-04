@@ -1,0 +1,57 @@
+```mermaid
+graph TD
+    %% Main System Components
+    A[User] --> B{Authentication}
+    B -->|Login| C[Home Page]
+    B -->|Sign Up| D[Registration]
+    
+    %% Home Page Components
+    C --> E[Emergency Category Grid]
+    C --> F[Emergency Contacts]
+    
+    %% Emergency Categories
+    E --> G[Bleeding]
+    E --> H[Choking]
+    E --> I[Cardiac]
+    E --> J[Burns]
+    E --> K[Fractures]
+    E --> L[Poisoning]
+    E --> M[Other]
+    
+    %% Emergency Procedure Flow
+    G & H & I & J & K & L & M --> N[Emergency Procedure]
+    N --> O[Step-by-Step Instructions]
+    O --> P[Step 1]
+    O --> Q[Step 2]
+    O --> R[Step 3]
+    O --> S[Step 4]
+    
+    %% Emergency Contacts
+    F --> T[Contact List]
+    F --> U[Location Sharing]
+    
+    %% Navigation and UI Components
+    C --> V[Navigation Bar]
+    V --> W[Profile]
+    V --> X[Logout]
+    
+    %% Authentication States
+    B -->|Not Authenticated| Y[Login Form]
+    B -->|Authenticated| Z[Protected Routes]
+    
+    %% System Features
+    subgraph "System Features"
+        AA[Online Status]
+        AB[Toast Notifications]
+        AC[Chat Support]
+    end
+    
+    %% Styling
+    classDef auth fill:#f9f,stroke:#333,stroke-width:2px
+    classDef emergency fill:#f96,stroke:#333,stroke-width:2px
+    classDef feature fill:#9cf,stroke:#333,stroke-width:2px
+    
+    class B,Y,Z auth
+    class G,H,I,J,K,L,M,N,O emergency
+    class AA,AB,AC feature
+``` 
